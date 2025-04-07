@@ -1,0 +1,17 @@
+// Paleta de colores principal (temática farmacéutica)
+$primary: #0077b6;       // Azul profesional (confianza/salud)
+$secondary: #2a9d8f;     // Verde turquesa (bienestar/naturaleza)
+$accent: #e76f51;        // Coral (énfasis/llamados a la acción)
+$light: #f8f9fa;         // Gris claro (fondos)
+$dark: #212529;          // Gris oscuro (textos)
+
+// Tipografía
+$font-family-sans-serif: 'Segoe UI', 'Arial', sans-serif;
+$font-size-base: 1rem;   // 16px base
+
+// Espaciados
+$spacer: 1rem;           // Unidad base de espaciado
+$border-radius: 0.5rem;
+
+// Sombras
+$box-shadow: 0 0.5rem 1rem rgba($dark, 0.15);
