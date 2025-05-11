@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de Disponibilidad - Farmacia El Nayar</title>
+    <title>Disponibilidad - Farmacia El Nayar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <!-- Header -->
+    <!--Header-->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
             <div class="container">
@@ -28,7 +28,7 @@
                             <a class="nav-link" href="index.html"><i class="bi bi-house-door me-1"></i>Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pedidos.html"><i class="bi bi-cart3 me-1"></i>Pedidos</a>
+                            <a class="nav-link" href="carrito.html"><i class="bi bi-cart3 me-1"></i>Carrito</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="disponibilidad.html"><i class="bi bi-search me-1"></i>Disponibilidad</a>
@@ -53,68 +53,112 @@
         </nav>
     </header>
 
-    <!-- Contenido Principal -->
     <main class="container my-5">
-        <div class="row justify-content-center">
+        <!-- Sección de Búsqueda Mejorada -->
+        <div class="row justify-content-center mb-5">
             <div class="col-lg-10">
-                <!-- Encabezado -->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="fw-bold"><i class="bi bi-search-heart me-2"></i>Consulta de Stock</h1>
-                    <a href="pedidos.html" class="btn btn-outline-primary">Ver mi carrito</a>
-                </div>
-
-                <!-- Buscador -->
-                <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <form class="row g-3">
-                            <div class="col-md-8">
-                                <input type="search" class="form-control form-control-lg" 
-                                       placeholder="Nombre del medicamento o principio activo">
-                            </div>
-                            <div class="col-md-2">
-                                <select class="form-select">
-                                    <option>Todas categorías</option>
-                                    <option>Analgésicos</option>
-                                    <option>Antibióticos</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-primary w-100"><i class="bi bi-search"></i> Buscar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Resultados -->
-                <div class="row g-4">
-                    <!-- Producto 1 -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 product-card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <h5 class="card-title">Paracetamol 500mg</h5>
-                                    <span class="badge bg-success">En stock</span>
+                <div class="search-header text-white rounded-top p-4 shadow">
+                    <h1 class="fw-bold mb-4">
+                        <i class="bi bi-search-heart"></i> Buscador de Medicamentos
+                    </h1>
+                    
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <form class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="search" 
+                                           class="form-control form-control-lg" 
+                                           placeholder="Nombre del medicamento..."
+                                           aria-label="Buscar">
                                 </div>
-                                <p class="text-muted small">Tabletas x 20 - Genérico</p>
-                                <hr>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="h5 text-primary">$45.00</span>
-                                    <div class="btn-group">
-                                        <a href="producto.html" class="btn btn-sm btn-outline-primary">Detalles</a>
-                                        <button class="btn btn-sm btn-primary">Agregar</button>
-                                    </div>
+                                <div class="col-md-3">
+                                    <select class="form-select form-select-lg">
+                                        <option>Todas las categorías</option>
+                                        <option>Analgésicos</option>
+                                        <option>Antibióticos</option>
+                                    </select>
                                 </div>
-                            </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-light btn-lg w-100">
+                                        <i class="bi bi-search"></i> Buscar
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-                    <!-- Más productos... -->
                 </div>
             </div>
         </div>
+
+        <!-- Resultados con Tarjetas Mejoradas -->
+        <div class="row g-4">
+            <!-- Producto 1 -->
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card h-100 product-card shadow-sm">
+                    <div class="card-img-top bg-light p-3 text-center">
+                        <img src="img/productos/paracetamol.jpg" 
+                             alt="Paracetamol 500mg" 
+                             class="img-fluid"
+                             style="max-height: 150px;">
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title">Paracetamol 500mg</h5>
+                            <span class="badge bg-success">En stock</span>
+                        </div>
+                        <p class="text-muted small mb-3">Tabletas x 20 - Genérico</p>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h4 text-primary">$45.00</span>
+                            <div class="btn-group">
+                                <a href="producto.html" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-info-circle"></i> Detalles
+                                </a>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="bi bi-cart-plus"></i> Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card h-100 product-card shadow-sm">
+                    <div class="card-img-top bg-light p-3 text-center">
+                        <img src="img/productos/omeprazol.jpg" 
+                             alt="Omeprazol 20mg" 
+                             class="img-fluid"
+                             style="max-height: 150px;">
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title">Omeprazol 20mg</h5>
+                            <span class="badge bg-warning text-dark">Últimas unidades</span>
+                        </div>
+                        <p class="text-muted small mb-3">Cápsulas x 14 - Patente</p>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h4 text-primary">$78.00</span>
+                            <div class="btn-group">
+                                <a href="producto.html" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-info-circle"></i> Detalles
+                                </a>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="bi bi-cart-plus"></i> Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Más productos... -->
+        </div>
     </main>
 
-    <!-- Footer -->
+    <!--Footer-->
     <footer class="footer-custom py-5 bg-dark text-light">
         <div class="container">
             <div class="row">
@@ -152,7 +196,6 @@
             </div>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

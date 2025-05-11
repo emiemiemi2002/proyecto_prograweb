@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos - Farmacia El Nayar</title>
+    <title>Iniciar Sesión - Farmacia El Nayar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <!--Header-->
+    <!-- Header -->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
             <div class="container">
@@ -28,7 +28,7 @@
                             <a class="nav-link" href="index.html"><i class="bi bi-house-door me-1"></i>Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pedidos.html"><i class="bi bi-cart3 me-1"></i>Pedidos</a>
+                            <a class="nav-link" href="carrito.html"><i class="bi bi-cart3 me-1"></i>Carrito</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="disponibilidad.html"><i class="bi bi-search me-1"></i>Disponibilidad</a>
@@ -54,59 +54,68 @@
     </header>
 
     <main class="container my-5">
-        <!-- Filtros y Búsqueda -->
-        <div class="card shadow-sm mb-4">
-            <div class="card-body">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <input type="search" class="form-control" placeholder="Buscar medicamento...">
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-select">
-                            <option>Todas las categorías</option>
-                            <option>Analgésicos</option>
-                            <option>Antibióticos</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-select">
-                            <option>Todos los tipos</option>
-                            <option>Genérico</option>
-                            <option>Patente</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="fw-bold mb-4 text-center">
+                            <i class="bi bi-person-circle me-2"></i>Iniciar Sesión
+                        </h2>
 
-        <!-- Listado de Productos -->
-        <div class="row g-4">
-            <!-- Producto 1 -->
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <div class="card product-card h-100">
-                    <img src="img/productos/paracetamol.jpg" class="card-img-top p-3" alt="Paracetamol 500mg">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h5 class="card-title">Paracetamol 500mg</h5>
-                            <span class="badge bg-success">En stock</span>
-                        </div>
-                        <p class="text-muted small">Tabletas x 20 - Genérico</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="h5 text-primary">$45.00</span>
-                            <div class="btn-group">
-                                <a href="producto.html" class="btn btn-sm btn-outline-primary">Detalles</a>
-                                <button class="btn btn-sm btn-primary">Agregar</button>
+                        <form id="loginForm">
+                            <!-- Campo de identificación -->
+                            <div class="mb-3">
+                                <label class="form-label">Correo o Teléfono <span class="text-danger">*</span></label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       required
+                                       placeholder="ejemplo@correo.com ó 6181234567">
                             </div>
-                        </div>
+
+                            <!-- Contraseña -->
+                            <div class="mb-4">
+                                <label class="form-label">Contraseña <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="password" 
+                                           class="form-control" 
+                                           id="password" 
+                                           required
+                                           placeholder="••••••••">
+                                    <button class="btn btn-outline-secondary" 
+                                            type="button" 
+                                            id="togglePassword">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Recuperación de contraseña -->
+                            <div class="mb-4 text-end">
+                                <a href="recuperar-contrasena.html" class="text-decoration-none">
+                                    <i class="bi bi-question-circle"></i> ¿Olvidaste tu contraseña?
+                                </a>
+                            </div>
+
+                            <!-- Botón de envío -->
+                            <button type="submit" class="btn btn-primary w-100 mb-3">
+                                <i class="bi bi-box-arrow-in-right"></i> Ingresar
+                            </button>
+
+                            <!-- Enlace a registro -->
+                            <div class="text-center">
+                                <span class="text-muted">¿No tienes cuenta? </span>
+                                <a href="registro.html" class="text-decoration-none">
+                                    Regístrate aquí
+                                </a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <!-- Más productos... -->
         </div>
     </main>
 
-    <!--Footer-->
+    <!-- Footer -->
     <footer class="footer-custom py-5 bg-dark text-light">
         <div class="container">
             <div class="row">
@@ -144,6 +153,15 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Toggle para mostrar contraseña
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('bi-eye-slash');
+        });
+    </script>
 </body>
 </html>
