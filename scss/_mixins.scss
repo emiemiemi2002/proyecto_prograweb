@@ -1,0 +1,22 @@
+// Mixin para elementos centrados
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  // Mixin para tarjetas con efecto hover
+  @mixin card-hover-effect {
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: translateY(-0.5rem);
+      box-shadow: $box-shadow;
+    }
+  }
+  
+  // Mixin para responsive breakpoints
+  @mixin respond-to($breakpoint) {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }

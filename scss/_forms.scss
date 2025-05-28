@@ -1,0 +1,20 @@
+.form-control {
+    border-radius: $border-radius;
+    border: 2px solid $secondary;
+    
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 0.25rem rgba($primary, 0.25);
+    }
+  }
+  
+  .form-label {
+    font-weight: 600;
+    color: $dark;
+    margin-bottom: $spacer * 0.5;
+  }
+  
+  .input-group-text {
+    background-color: $light;
+    border: 2px solid $secondary;
+  }

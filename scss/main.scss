@@ -1,0 +1,28 @@
+// Importar Bootstrap primero
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Importar componentes personalizados
+@import 'variables';
+@import 'mixins';
+@import 'buttons';
+@import 'forms';
+@import 'layout';
+
+// Estilos globales
+body {
+  font-family: $font-family-sans-serif; 
+  color: $dark;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  color: $primary;
+  font-weight: 700;
+  margin-bottom: $spacer * 1.5;
+}
+
+// Responsive images
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}

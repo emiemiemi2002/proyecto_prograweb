@@ -1,0 +1,29 @@
+.btn {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    
+    &-primary {
+      background: linear-gradient(135deg, $primary, darken($primary, 10%));
+      border: none;
+      
+      &:hover {
+        background: linear-gradient(135deg, darken($primary, 5%), darken($primary, 15%));
+      }
+    }
+  
+    &-outline-primary {
+      border: 2px solid $primary;
+      color: $primary;
+      
+      &:hover {
+        background: $primary;
+        color: white;
+      }
+    }
+  
+    &-success {
+      background: linear-gradient(135deg, $secondary, darken($secondary, 10%));
+      border: none;
+    }
+  }
