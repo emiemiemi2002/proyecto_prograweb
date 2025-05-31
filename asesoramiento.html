@@ -8,6 +8,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/formato.css">
+    
+    <style>
+        .accordion-button:not(.collapsed) {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+        }
+        .chat-box {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .historial-item {
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+        }
+        .respuesta-item {
+            background-color: #e8f5e9;
+            border-left: 4px solid #28a745;
+        }
+        .file-link {
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -66,32 +91,42 @@
                     <div class="card-body">
                         <h2 class="fw-bold mb-4"><i class="bi bi-heart-pulse me-2"></i>Consulta al Farmacéutico</h2>
                         
-                        <form>
+                        <form id="consultaForm" enctype="multipart/form-data">
                             <!-- Campos del formulario -->
                             <div class="mb-3">
-                                <label class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" required>
+                                <label class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                <input type="tel" name="telefono" class="form-control" required
+                                       placeholder="Ej: 6181234567" pattern="[0-9]{10}">
+                                <small class="text-muted">10 dígitos sin espacios ni guiones</small>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Asunto de la consulta</label>
-                                <select class="form-select" required>
+                                <label class="form-label">Correo electrónico (opcional)</label>
+                                <input type="email" name="email" class="form-control" placeholder="ejemplo@correo.com">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Asunto de la consulta <span class="text-danger">*</span></label>
+                                <select class="form-select" name="asunto" required>
                                     <option value="">Seleccionar...</option>
                                     <option>Dosis y horarios</option>
                                     <option>Interacciones</option>
                                     <option>Efectos secundarios</option>
+                                    <option>Alergias</option>
+                                    <option>Embarazo y lactancia</option>
+                                    <option>Otro</option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Descripción detallada</label>
-                                <textarea class="form-control" rows="5" 
+                                <label class="form-label">Descripción detallada <span class="text-danger">*</span></label>
+                                <textarea class="form-control" name="mensaje" rows="5" 
                                           placeholder="Incluye síntomas, medicamentos actuales, etc." required></textarea>
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label">Adjuntar archivos</label>
-                                <input type="file" class="form-control" multiple>
+                                <label class="form-label">Adjuntar archivos (opcional)</label>
+                                <input type="file" name="adjunto[]" class="form-control" multiple>
                                 <small class="text-muted">Formatos permitidos: PDF, JPG, PNG (max. 10MB)</small>
                             </div>
 
@@ -103,7 +138,7 @@
                 </div>
             </div>
 
-            <!-- FAQ y Chat -->
+            <!-- FAQ y Historial de Consultas -->
             <div class="col-lg-5">
                 <div class="card shadow">
                     <div class="card-body">
@@ -121,27 +156,48 @@
                                     </h4>
                                     <div id="faq1" class="accordion-collapse collapse">
                                         <div class="accordion-body">
-                                            Conservar en lugar fresco y seco, lejos de la luz solar directa.
+                                            Conservar en lugar fresco y seco, lejos de la luz solar directa. Algunos medicamentos requieren refrigeración (entre 2-8°C). Verifica siempre las indicaciones del envase.
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Más preguntas... -->
+                                
+                                <!-- Pregunta 2 -->
+                                <div class="accordion-item">
+                                    <h4 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" 
+                                                data-bs-toggle="collapse" data-bs-target="#faq2">
+                                            ¿Qué hago si olvidé tomar una dosis?
+                                        </button>
+                                    </h4>
+                                    <div id="faq2" class="accordion-collapse collapse">
+                                        <div class="accordion-body">
+                                            Si te das cuenta poco después, toma la dosis olvidada. Si ya es casi hora de la siguiente, omite la dosis olvidada y continúa con tu horario normal. Nunca tomes dosis doble para compensar.
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Pregunta 3 -->
+                                <div class="accordion-item">
+                                    <h4 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" 
+                                                data-bs-toggle="collapse" data-bs-target="#faq3">
+                                            ¿Puedo tomar alcohol con mi medicamento?
+                                        </button>
+                                    </h4>
+                                    <div id="faq3" class="accordion-collapse collapse">
+                                        <div class="accordion-body">
+                                            Muchos medicamentos interactúan con el alcohol. Consulta siempre con tu farmacéutico. Como regla general, evita el alcohol con antibióticos, analgésicos fuertes, antidepresivos y medicamentos para la presión.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Chat -->
+                        <!-- Historial de Consultas -->
                         <div class="border-top pt-4">
-                            <h3 class="fw-bold mb-4"><i class="bi bi-chat-left-dots me-2"></i>Chat en Vivo</h3>
-                            <div class="alert alert-info">
-                                Horario de atención: Lunes a Viernes de 9:00 a 18:00 hrs
-                            </div>
-                            <div class="chat-box bg-light p-3 rounded">
-                                <!-- Mensajes del chat -->
-                                <div class="text-center text-muted py-5">
-                                    <i class="bi bi-chat-square-text fs-1"></i>
-                                    <p class="mt-2">Inicia el chat para conversar con nuestro equipo</p>
-                                    <button class="btn btn-primary disabled">Chat no disponible</button>
-                                </div>
+                            <h3 class="fw-bold mb-4"><i class="bi bi-chat-left-text me-2"></i>Tus Consultas Anteriores</h3>
+                            <div id="historial-consultas" class="bg-light p-3 rounded">
+                                <p class="text-center text-muted py-3">Cargando tu historial de consultas...</p>
                             </div>
                         </div>
                     </div>
@@ -191,5 +247,140 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/principal.js"></script>
+    
+    <!-- Script para el formulario y carga de historial -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Cargar historial de consultas
+        cargarHistorialConsultas();
+
+        // Manejar envío del formulario
+        const form = document.getElementById('consultaForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            // Mostrar spinner de carga
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Enviando...';
+            
+            fetch('backend/enviar_consulta.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Mostrar alerta de éxito
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-success alert-dismissible fade show';
+                    alertDiv.innerHTML = `
+                        <i class="bi bi-check-circle-fill me-2"></i> Consulta enviada con éxito. Te responderemos pronto.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    `;
+                    form.prepend(alertDiv);
+                    
+                    // Resetear formulario
+                    form.reset();
+                    
+                    // Recargar historial
+                    cargarHistorialConsultas();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('Error de conexión. Por favor intenta nuevamente.');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="bi bi-send-check"></i> Enviar consulta';
+            });
+        });
+    });
+
+    function cargarHistorialConsultas() {
+        const container = document.getElementById('historial-consultas');
+        container.innerHTML = '<p class="text-center py-3"><span class="spinner-border spinner-border-sm me-2"></span> Cargando historial...</p>';
+        
+        // En un sistema real, el id_usuario se obtendría de la sesión
+        // Aquí simulamos que el usuario está logueado con id=1 (para pruebas)
+        const idUsuario = 1; // Debe reemplazarse por el id real del usuario logueado
+        
+        fetch(`backend/obtener_consultas.php?id_usuario=${idUsuario}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Error al cargar el historial');
+                return response.json();
+            })
+            .then(consultas => {
+                if (consultas.length === 0) {
+                    container.innerHTML = '<p class="text-center py-3">No tienes consultas anteriores.</p>';
+                    return;
+                }
+                
+                let html = '';
+                consultas.forEach(consulta => {
+                    const fechaConsulta = new Date(consulta.fecha_consulta);
+                    const fechaRespuesta = consulta.fecha_respuesta ? new Date(consulta.fecha_respuesta) : null;
+                    
+                    html += `
+                        <div class="historial-item ${consulta.respuesta ? 'respuesta-item' : ''}">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5>${consulta.asunto}</h5>
+                                <span class="badge ${consulta.respuesta ? 'bg-success' : 'bg-warning'}">
+                                    ${consulta.respuesta ? 'Respondida' : 'Pendiente'}
+                                </span>
+                            </div>
+                            <p class="small text-muted mb-2">
+                                <i class="bi bi-calendar me-1"></i> 
+                                ${fechaConsulta.toLocaleDateString('es-MX', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                })}
+                            </p>
+                            <p class="mb-2"><strong>Tu consulta:</strong> ${consulta.mensaje}</p>
+                            
+                            ${consulta.adjunto_url ? `
+                                <p class="small">
+                                    <i class="bi bi-paperclip"></i> 
+                                    <a href="${consulta.adjunto_url}" target="_blank" class="file-link text-primary">
+                                        Ver archivo adjunto
+                                    </a>
+                                </p>
+                            ` : ''}
+                            
+                            ${consulta.respuesta ? `
+                                <div class="mt-3 p-3 bg-white rounded border">
+                                    <h6><i class="bi bi-check-circle-fill text-success me-2"></i>Respuesta del farmacéutico:</h6>
+                                    <p>${consulta.respuesta}</p>
+                                    <p class="small text-muted mb-0">
+                                        <i class="bi bi-calendar me-1"></i> 
+                                        ${fechaRespuesta.toLocaleDateString('es-MX', { 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        })}
+                                    </p>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                container.innerHTML = '<p class="text-center py-3">Error al cargar el historial. Intenta recargar la página.</p>';
+            });
+    }
+    </script>
 </body>
 </html>

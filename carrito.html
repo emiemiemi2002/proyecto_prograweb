@@ -9,6 +9,35 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/formato.css">
 
+    <style>
+        .quantity-btn {
+            cursor: pointer;
+            user-select: none;
+            font-size: 1.2rem;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+        .quantity-btn.minus {
+            background-color: #f8f9fa;
+        }
+        .quantity-btn.plus {
+            background-color: #f8f9fa;
+        }
+        .product-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+        .empty-cart-icon {
+            font-size: 5rem;
+            opacity: 0.2;
+        }
+    </style>
 </head>
 <body>
     <!--Header-->
@@ -73,72 +102,12 @@
 
                 <!-- Lista de Productos -->
                 <div class="card shadow-sm mb-4">
-                    <div class="card-body">
-                        <!-- Producto 1 -->
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="d-flex align-items-center">
-                                <img src="img/productos/paracetamol.jpg" 
-                                     alt="Paracetamol" 
-                                     class="img-thumbnail me-3" 
-                                     style="width: 80px; height: 80px; object-fit: contain;">
-                                <div>
-                                    <h5 class="mb-1">Paracetamol 500mg</h5>
-                                    <p class="text-muted small mb-0">Tabletas x 20 - Genérico</p>
-                                    <span class="text-success small">
-                                        <i class="bi bi-check-circle"></i> Disponible
-                                    </span>
-                                </div>
+                    <div class="card-body" id="lista-productos">
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Cargando...</span>
                             </div>
-                            
-                            <div class="text-end">
-                                <div class="input-group mb-2" style="width: 140px;">
-                                    <button class="btn btn-outline-secondary">-</button>
-                                    <input type="number" 
-                                           class="form-control text-center" 
-                                           value="2" 
-                                           min="1" 
-                                           max="10">
-                                    <button class="btn btn-outline-secondary">+</button>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-muted small me-2">$45.00 c/u</span>
-                                    <span class="h5 text-primary">$90.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-
-                        <!-- Producto 2 -->
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="img/productos/omeprazol.jpg" 
-                                     alt="Omeprazol" 
-                                     class="img-thumbnail me-3" 
-                                     style="width: 80px; height: 80px; object-fit: contain;">
-                                <div>
-                                    <h5 class="mb-1">Omeprazol 20mg</h5>
-                                    <p class="text-muted small mb-0">Cápsulas x 14 - Patente</p>
-                                    <span class="text-warning small">
-                                        <i class="bi bi-exclamation-triangle"></i> Últimas unidades
-                                    </span>
-                                </div>
-                            </div>
-                            
-                            <div class="text-end">
-                                <div class="input-group mb-2" style="width: 140px;">
-                                    <button class="btn btn-outline-secondary">-</button>
-                                    <input type="number" 
-                                           class="form-control text-center" 
-                                           value="1" 
-                                           min="1" 
-                                           max="5">
-                                    <button class="btn btn-outline-secondary">+</button>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-muted small me-2">$78.00 c/u</span>
-                                    <span class="h5 text-primary">$78.00</span>
-                                </div>
-                            </div>
+                            <p class="mt-3">Cargando tu carrito...</p>
                         </div>
                     </div>
                 </div>
@@ -154,30 +123,30 @@
                         <div class="mb-4">
                             <div class="d-flex justify-content-between mb-2">
                                 <span class="text-muted">Subtotal:</span>
-                                <span>$168.00</span>
+                                <span id="subtotal">$0.00</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span class="text-muted">Descuentos:</span>
-                                <span class="text-danger">-$0.00</span>
+                                <span class="text-danger" id="descuentos">-$0.00</span>
                             </div>
                             <div class="d-flex justify-content-between mb-3">
                                 <span class="text-muted">Recojo en tienda:</span>
-                                <span class="text-success">Gratis</span>
+                                <span class="text-success" id="envio">Gratis</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between fw-bold fs-5">
                                 <span>Total:</span>
-                                <span>$168.00</span>
+                                <span id="total">$0.00</span>
                             </div>
                         </div>
 
                         <!-- Acciones -->
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary btn-lg" 
-                                    onclick="window.location.href='confirmacion.html'">
+                                    onclick="procesarPedido()">
                                 <i class="bi bi-check-circle"></i> Confirmar Reserva
                             </button>
-                            <button class="btn btn-outline-secondary btn-lg">
+                            <button class="btn btn-outline-secondary btn-lg" id="vaciar-carrito">
                                 <i class="bi bi-trash"></i> Vaciar Carrito
                             </button>
                         </div>
@@ -225,8 +194,155 @@
             </div>
         </div>
     </footer>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/principal.js"></script>
-
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener carrito de localStorage
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const container = document.getElementById('lista-productos');
+            
+            // Vaciar carrito
+            document.getElementById('vaciar-carrito').addEventListener('click', function() {
+                localStorage.removeItem('carrito');
+                carrito = [];
+                actualizarCarrito();
+            });
+            
+            // Función para renderizar los productos del carrito
+            function actualizarCarrito() {
+                container.innerHTML = '';
+                
+                if (carrito.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-5">
+                            <i class="bi bi-cart-x empty-cart-icon"></i>
+                            <h4 class="mt-3">Tu carrito está vacío</h4>
+                            <p class="text-muted">Agrega productos desde nuestro catálogo</p>
+                            <a href="disponibilidad.html" class="btn btn-primary mt-3">
+                                <i class="bi bi-arrow-left"></i> Ir al catálogo
+                            </a>
+                        </div>
+                    `;
+                    actualizarTotales();
+                    return;
+                }
+                
+                carrito.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'd-flex justify-content-between align-items-center mb-3';
+                    itemElement.innerHTML = `
+                        <div class="d-flex align-items-center">
+                            <img src="${item.imagen_url || 'img/productos/default.jpg'}" 
+                                 alt="${item.nombre}" 
+                                 class="img-thumbnail me-3 product-img">
+                            <div>
+                                <h5 class="mb-1">${item.nombre}</h5>
+                                <p class="text-muted small mb-0">$${item.precio.toFixed(2)} c/u</p>
+                            </div>
+                        </div>
+                        
+                        <div class="text-end">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="quantity-btn minus" 
+                                      onclick="modificarCantidad(${item.id}, -1)">-</span>
+                                <input type="number" class="form-control text-center mx-2" 
+                                       value="${item.cantidad}" min="1" max="100" 
+                                       style="width: 60px;" 
+                                       onchange="actualizarCantidad(${item.id}, this.value)" 
+                                       id="cantidad-${item.id}">
+                                <span class="quantity-btn plus" 
+                                      onclick="modificarCantidad(${item.id}, 1)">+</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-muted small me-2">$${(item.precio * item.cantidad).toFixed(2)}</span>
+                                <button class="btn btn-sm btn-danger" onclick="eliminarDelCarrito(${item.id})">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(itemElement);
+                });
+                
+                actualizarTotales();
+            }
+            
+            // Actualizar totales del pedido
+            function actualizarTotales() {
+                const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+                const descuentos = 0; // Aquí podrías agregar lógica de descuentos
+                const envio = 0; // Recojo en tienda gratis
+                const total = subtotal - descuentos + envio;
+                
+                document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('descuentos').textContent = `-$${descuentos.toFixed(2)}`;
+                document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+            }
+            
+            // Llamar a la función inicial
+            actualizarCarrito();
+        });
+        
+        // Función para modificar la cantidad (desde los botones + y -)
+        function modificarCantidad(id, cambio) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const itemIndex = carrito.findIndex(item => item.id === id);
+            
+            if (itemIndex !== -1) {
+                carrito[itemIndex].cantidad += cambio;
+                
+                // Eliminar si la cantidad es menor a 1
+                if (carrito[itemIndex].cantidad < 1) {
+                    carrito.splice(itemIndex, 1);
+                }
+                
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+                location.reload(); // Recargar para ver cambios
+            }
+        }
+        
+        // Función para actualizar cantidad desde el input
+        function actualizarCantidad(id, nuevaCantidad) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const itemIndex = carrito.findIndex(item => item.id === id);
+            
+            if (itemIndex !== -1) {
+                nuevaCantidad = parseInt(nuevaCantidad);
+                if (nuevaCantidad > 0) {
+                    carrito[itemIndex].cantidad = nuevaCantidad;
+                } else {
+                    carrito.splice(itemIndex, 1);
+                }
+                
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+                location.reload();
+            }
+        }
+        
+        // Función para eliminar un producto del carrito
+        function eliminarDelCarrito(id) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito = carrito.filter(item => item.id !== id);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            location.reload();
+        }
+        
+        // Función para procesar el pedido
+        function procesarPedido() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            
+            if (carrito.length === 0) {
+                alert('Tu carrito está vacío. Agrega productos antes de continuar.');
+                return;
+            }
+            
+            // En un sistema completo, aquí enviarías el pedido al backend
+            // Por ahora, simplemente redirigiremos a la página de confirmación
+            localStorage.removeItem('carrito'); // Vaciar el carrito
+            window.location.href = 'confirmacion.html';
+        }
+    </script>
 </body>
 </html>
